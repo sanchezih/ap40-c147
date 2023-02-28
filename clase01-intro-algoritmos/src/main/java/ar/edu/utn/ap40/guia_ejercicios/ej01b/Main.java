@@ -8,6 +8,7 @@ public class Main {
 		int numeroFin = 14;
 
 		while (numeroInicio <= numeroFin) {
+			// Si el resultado de la division es 0, es par
 			if (numeroInicio % 2 == 0) {
 				System.out.println(numeroInicio);
 			}

@@ -14,9 +14,9 @@ public class Main {
 		int cantidadDeInmuebles = 1;
 		boolean posserEmbarcacionOAeronave = false;
 
-		if ((ingresosMensualesTotales > 489083) && //
-				(cantidadDeVehiculos >= 3) && //
-				(cantidadDeInmuebles >= 3) && //
+		if ((ingresosMensualesTotales > 489083) || //
+				(cantidadDeVehiculos >= 3) || //
+				(cantidadDeInmuebles >= 3) || //
 				(posserEmbarcacionOAeronave == true) //
 		) {
 			System.out.println("SI es de segmento alto");
