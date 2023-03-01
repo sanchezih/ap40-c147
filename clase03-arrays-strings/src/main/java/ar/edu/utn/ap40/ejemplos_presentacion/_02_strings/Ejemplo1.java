@@ -22,8 +22,6 @@ public class Ejemplo1 {
 		 */
 		String txt1 = "Hola!";
 		String txt2 = "Chau!";
-		
-		List unaLista;
 
 		/*
 		 * Se puede pensar como un array del tipo de dato "char", aunque como veremos,

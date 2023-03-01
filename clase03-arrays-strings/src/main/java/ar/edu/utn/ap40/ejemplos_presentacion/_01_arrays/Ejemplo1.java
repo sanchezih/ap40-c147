@@ -28,12 +28,8 @@ public class Ejemplo1 {
 		// la variable. Lo que vimos como "tipos primitivos" no lo permiten, pero los
 		// arrays tienen una fundamental: "length", que nos dice el tamanio del array.
 
-		
-		
-		
-		
 		for (int indice = 0; indice < numeros.length; indice++) {
-			System.out.println(numeros[indice]);// imprime por pantalla cada elemento
+			System.out.println(numeros[indice]); // imprime por pantalla cada elemento
 		}
 
 	}
