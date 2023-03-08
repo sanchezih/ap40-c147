@@ -1,0 +1,32 @@
+En Java podemos sellar una clase para evitar que otras clases hereden de la
+misma mediante la palabra clave 'final' previo a la declaración de la clase:
+ 
+public final class [Nombre de la clase] { }
+
+En algunas situaciones donde veamos que no tiene sentido aplicar herencia a la
+clase que estamos creando podemos declararla de tipo final. Si luego alguien
+quiere heredar de la misma se genera un error de compilacion.
+ 
+Ejercicio
+
+Desarrollar una clase que represente un punto en el plano y tenga los siguientes
+metodos: constructor, imprimir en que cuadrante se encuentra dicho punto
+(concepto matematico, primer cuadrante si x e y son positivas, si x<0 e y>0
+segundo cuadrante, etc.).
+
+Sellar la clase para evitar que se pueda aplicar herencia en la misma.
+
+Podemos nombrar que el API de Java tiene una gran cantidad de clases definidas
+como final:
+    -System
+    -Scanner
+    -String
+    -Math
+    -Byte
+    -Short
+    -Integer
+    -Long
+    -Float
+    -Double
+    -Boolean
+    -Character

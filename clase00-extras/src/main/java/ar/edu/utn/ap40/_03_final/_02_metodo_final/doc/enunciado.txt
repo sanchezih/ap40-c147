@@ -1,0 +1,22 @@
+En Java podemos sellar un metodo para que las subclases no puedan
+sobreescribirlo, para ello debemos agregar la palabra clave final previo al tipo
+de dato que devuelve:
+
+public final void imprimir()
+
+El metodo imprimir no podra ser implementado en una sublclase.
+
+Un metodo que se lo declara como final es mas eficiente, ya que el compilador
+puede vincular con el codigo definido en dicho metodo ya que las subclases no lo
+pueden implementar.
+
+Ejercicio
+
+Confeccionar una clase Persona que tenga como atributos el nombre y la edad.
+Retornar si la persona es mayor de edad o no (definir dicho metodo como final).
+
+Plantear una segunda clase Empleado que herede de la clase Persona. Agregar un
+atributo sueldo y los metodos de cargar el sueldo e imprimir su sueldo.
+
+Definir un objeto de la clase Persona y llamar a sus metodos. Tambien crear un
+objeto de la clase Empleado y llamar a sus metodos.

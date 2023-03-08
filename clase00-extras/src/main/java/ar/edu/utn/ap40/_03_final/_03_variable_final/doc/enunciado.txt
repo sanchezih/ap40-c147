@@ -1,0 +1,45 @@
+Variables con Palabra Clave final
+
+Cuando una variable se declara con la palabra clave final, su valor no se puede
+modificar, esencialmente, es una constante. Esto tambien significa que debe
+inicializar una variable final.
+Si la variable final es una referencia, esto significa que la variable no se
+puede volver a vincular para hacer referencia a otro objeto, pero el estado
+interno del objeto apuntado por esa variable de referencia se puede cambiar, es
+decir, puede agregar o eliminar elementos de la matriz final o coleccion final.
+Es una buena practica representar las variables finales en mayusculas,
+utilizando guiones bajos para separar las palabras.
+
+Inicializar una variable final
+
+Debemos inicializar una variable final, de lo contrario el compilador emitira un
+error en tiempo de compilacion. Una variable final solo se puede inicializar una
+vez, ya sea a traves de un inicializador o una declaracion de asignacion. Hay
+tres formas de inicializar una variable final:
+    1. Puede inicializar una variable final cuando se declara. Este enfoque es
+    el mas comun. Una variable final se llama variable final en blanco si no se
+    inicializa en la declaracion.
+    2. Se puede inicializar una variable final en blanco dentro del bloque
+    inicializador de instancias o dentro del constructor. Si tiene mas de un
+    constructor en tu clase, debe inicializarse en todos ellos, de lo contrario
+    se generara un error de tiempo de compilacion.
+    3. Una variable estatica final en blanco se puede inicializar dentro de un
+    bloque estatico.
+
+Cuando usar una variable final?
+
+La unica diferencia entre una variable normal y una variable final es que
+podemos reasignar el valor a una variable normal, pero no podemos cambiar el
+valor de una variable final una vez asignada. Por lo tanto, las variables
+finales deben usarse solo para los valores que queremos que permanezcan
+constantes durante la ejecucion del programa.
+
+Variable final de referencia
+
+Cuando una variable final es una referencia a un objeto, esta variable final se
+denomina variable final de referencia. Por ejemplo, una variable final de
+StringBuffer se parece a: final StringBuffer cadena;
+Como es sabido, una variable final no se puede reasignar. Pero en el caso de una
+variable final de referencia, se puede cambiar el estado interno del objeto
+senialado por esa variable de referencia. Tenga en cuenta que esto no es una
+reasignacion. Esta propiedad de final se llama no-transitividad.
