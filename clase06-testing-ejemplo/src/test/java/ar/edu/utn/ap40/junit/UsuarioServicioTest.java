@@ -16,42 +16,48 @@ public class UsuarioServicioTest {
 		usuarioServicio.crearUsuario(2L, "Melina");
 	}
 
-	@DisplayName("Dado un usuario que queremos crear, esperamos que cuando creamos el usuario...")
+	@DisplayName("Validar que un usuario creado tenga el id valido")
 	@Test
 	public void test1() {
-
 		UsuarioDto esperado = new UsuarioDto(3L, "Martin");
-
 		UsuarioDto resultado = usuarioServicio.crearUsuario(3L, "Martin");
-		//Assertions.assertEquals(esperado, resultado); // Esto usara el metodo equals
-		Assertions.assertEquals(esperado.id, resultado.id);
 
+		Assertions.assertEquals(esperado.getId(), resultado.getId());
 	}
 
+	@DisplayName("Validar que un usuario creado sea igual al usuario creado para el test")
 	@Test
 	public void test2() {
+		UsuarioDto esperado = new UsuarioDto(3L, "Martin");
+		UsuarioDto resultado = usuarioServicio.crearUsuario(3L, "Martin");
 
-		UsuarioDto esperado = new UsuarioDto(1L, "NombreDePruebaErroneo");
+		Assertions.assertEquals(esperado, resultado); // Esto usara el metodo equals
+	}
 
-		final UsuarioDto resultado = usuarioServicio.crearUsuario(1L, "NombreDePrueba");
-		Assertions.assertNotEquals(esperado, resultado);
-		Assertions.assertNotEquals(esperado.nombre, resultado.nombre);
+	@DisplayName("Crear un usuario y validar que su noombre sea distinto al que tiene el usuario creado para el test")
+	@Test
+	public void test3() {
+		UsuarioDto esperado = new UsuarioDto(3L, "Enrique");
+		final UsuarioDto resultado = usuarioServicio.crearUsuario(3L, "Felipe");
+
+		Assertions.assertNotEquals(esperado.getNombre(), resultado.getNombre());
 
 	}
 
 	@DisplayName("Buscar un usuario inexistente y validar que sea null")
 	@Test
-	public void test3() {
+	public void test4() {
 		final UsuarioDto resultado = usuarioServicio.obtenerUsuario(3L);
 		Assertions.assertEquals(null, resultado);
 	}
 
 	@DisplayName("Actualizar el nombre de un usuario existente y validar que se haya actualizado correctamente")
 	@Test
-	public void test4() {
+	public void test5() {
 		UsuarioDto esperado = new UsuarioDto(1L, "Fernanda");
 		UsuarioDto actualizado = usuarioServicio.actualizarUsuario(1L, "Fernanda");
 		UsuarioDto resultado = usuarioServicio.obtenerUsuario(1L);
+
 		Assertions.assertEquals(esperado.getNombre(), resultado.getNombre());
 	}
 

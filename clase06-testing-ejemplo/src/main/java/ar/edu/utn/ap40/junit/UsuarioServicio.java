@@ -7,7 +7,12 @@ public class UsuarioServicio {
 	// HashMap que simula una base de datos
 	private final HashMap<Long, UsuarioDto> usuarios = new HashMap<>();
 
-	
+	/**
+	 * 
+	 */
+	public UsuarioServicio() {
+	}
+
 	/**
 	 * 
 	 * @param id
