@@ -1,0 +1,4 @@
+1	40	jabon en polvo
+3	10	esponjas
+2	100	chocolates
+4	50	nosecomputa

@@ -1,0 +1,4 @@
+Para no duplicar codigo, se unifica:
+	1. Guia de ejercicios de la clase 5
+	2. Ejemplos de la clase 7
+	3. Guia de ejercicios de la clase 7
