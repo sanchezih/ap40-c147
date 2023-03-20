@@ -1,0 +1,1 @@
+Para no duplicar codigo, los ejercicios estan hechos sobre el mismo codigo de ejemplo
