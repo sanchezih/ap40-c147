@@ -1,4 +1,7 @@
 # Argentina Programa 4.0 - Java Inicial (C147)
+![GitHub last commit](https://img.shields.io/github/last-commit/sanchezih/ap40-c147)
+![GitHub repo size](https://img.shields.io/github/repo-size/sanchezih/ap40-c147)
+
 Plan nacional, federal e inclusivo de formacion en programacion y software \
 https://www.argentina.gob.ar/economia/conocimiento/argentina-programa
 
