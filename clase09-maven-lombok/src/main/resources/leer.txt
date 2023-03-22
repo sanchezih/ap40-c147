@@ -1,0 +1,5 @@
+https://computinglearner.com/how-to-create-a-java-console-menu-application/
+https://openwebinars.net/blog/como-instalar-y-usar-lombok/
+https://www.digitalocean.com/community/tutorials/install-maven-linux-ubuntu
+http://codigoelectronica.com/blog/instalar-maven-en-windows
+https://stackoverflow.com/questions/9689793/cant-execute-jar-file-no-main-manifest-attribute
