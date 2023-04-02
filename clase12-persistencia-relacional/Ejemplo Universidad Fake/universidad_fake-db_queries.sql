@@ -16,7 +16,7 @@ WHERE
  m.cd_materia = pmc.cd_materia AND pmc.cd_plan_estudio = 'II2009';
 -- -----------------------------------------------------------------------------
 SELECT m.cd_materia,
- m.nombre_materia
+ m.desc_materia
 FROM MATERIA m
 WHERE m.cd_materia IN (
 SELECT pmc.cd_materia
