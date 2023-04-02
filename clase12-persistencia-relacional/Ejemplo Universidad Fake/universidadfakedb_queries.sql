@@ -1,4 +1,4 @@
-USE universidad_fake_db;
+USE universidadfakedb;
 -- -----------------------------------------------------------------------------
 SELECT CONCAT_WS(' - ', cd_plan_estudio, titulo) AS cd_plan_estudio_y_titulo, 
  cd_plan_estudio, 

@@ -1,64 +1,65 @@
 -- -----------------------------------------------------------------------------
 -- Creacion de la base de datos
 -- -----------------------------------------------------------------------------
-DROP DATABASE IF EXISTS `universidad_fake_db`;
-CREATE DATABASE IF NOT EXISTS `universidad_fake_db`;
+DROP DATABASE IF EXISTS `universidadfakedb`;
+CREATE DATABASE IF NOT EXISTS `universidadfakedb`;
 -- -----------------------------------------------------------------------------
-USE `universidad_fake_db`;
+USE `universidadfakedb`;
 -- -----------------------------------------------------------------------------
 -- Creacion de la tabla PLAN_ESTUDIO
 -- -----------------------------------------------------------------------------
 CREATE TABLE PLAN_ESTUDIO (
- cd_plan_estudio CHAR(6), 
- titulo CHAR(100) NOT NULL, PRIMARY KEY (cd_plan_estudio)
+    cd_plan_estudio CHAR(6),
+    titulo CHAR(100) NOT NULL,
+    PRIMARY KEY (cd_plan_estudio)
 );
 -- -----------------------------------------------------------------------------
 -- Creacion de la tabla MATERIA
 -- -----------------------------------------------------------------------------
 CREATE TABLE MATERIA (
- cd_materia CHAR(6), 
- desc_materia CHAR(100) UNIQUE NOT NULL, PRIMARY KEY (cd_materia)
+    cd_materia CHAR(6),
+    desc_materia CHAR(100) UNIQUE NOT NULL,
+    PRIMARY KEY (cd_materia)
 );
 -- -----------------------------------------------------------------------------
 -- Creacion de la tabla PLAN_MATERIA_CUATRIMESTRE
 -- -----------------------------------------------------------------------------
 CREATE TABLE PLAN_MATERIA_CUATRIMESTRE (
- cd_plan_estudio CHAR(6), 
- cd_materia CHAR(6), 
- cuatrimestre_carrera INT CHECK (
- cuatrimestre_carrera IN (1, 2, 3, 4, 5, 6)
-), PRIMARY KEY (
- cd_plan_estudio, cd_materia, cuatrimestre_carrera
-), FOREIGN KEY (cd_plan_estudio) REFERENCES PLAN_ESTUDIO (cd_plan_estudio), FOREIGN KEY (cd_materia) REFERENCES MATERIA (cd_materia)
+    cd_plan_estudio CHAR(6),
+    cd_materia CHAR(6),
+    cuatrimestre_carrera INT CHECK (cuatrimestre_carrera IN (1 , 2, 3, 4, 5, 6)),
+    PRIMARY KEY (cd_plan_estudio , cd_materia , cuatrimestre_carrera),
+    FOREIGN KEY (cd_plan_estudio)
+        REFERENCES PLAN_ESTUDIO (cd_plan_estudio),
+    FOREIGN KEY (cd_materia)
+        REFERENCES MATERIA (cd_materia)
 );
 -- -----------------------------------------------------------------------------
 -- Creacion de la tabla CURSO
 -- -----------------------------------------------------------------------------
 CREATE TABLE CURSO (
- cd_curso INT, 
- cd_materia CHAR(6), 
- cd_plan_estudio CHAR(6), 
- semestre INT CHECK (
- semestre = 1 OR semestre = 2
-), 
- anio INT CHECK (
- anio BETWEEN 2005 AND 3000
-), PRIMARY KEY (cd_curso), FOREIGN KEY (cd_materia) REFERENCES MATERIA (cd_materia), FOREIGN KEY (cd_plan_estudio) REFERENCES PLAN_ESTUDIO (cd_plan_estudio)
+    cd_curso INT,
+    cd_materia CHAR(6),
+    cd_plan_estudio CHAR(6),
+    semestre INT CHECK (semestre = 1 OR semestre = 2),
+    anio INT CHECK (anio BETWEEN 2005 AND 3000),
+    PRIMARY KEY (cd_curso),
+    FOREIGN KEY (cd_materia)
+        REFERENCES MATERIA (cd_materia),
+    FOREIGN KEY (cd_plan_estudio)
+        REFERENCES PLAN_ESTUDIO (cd_plan_estudio)
 );
 -- -----------------------------------------------------------------------------
 -- Creacion de la tabla ALUMNO
 -- -----------------------------------------------------------------------------
 CREATE TABLE ALUMNO (
- cd_alumno INT NOT NULL AUTO_INCREMENT, 
- nombre_alumno CHAR(100) NOT NULL, 
- apellido_alumno CHAR(100) NOT NULL, 
- tipo_doc_alumno CHAR(3) CHECK (
- tipo_doc_alumno IN ('DNI', 'CI')
-), 
- nro_doc_alumno INT CHECK (
- nro_doc_alumno BETWEEN 1000 AND 999999999
-), 
- email_alumno CHAR(100) NOT NULL, PRIMARY KEY (cd_alumno)
+    cd_alumno INT NOT NULL AUTO_INCREMENT,
+    nombre_alumno CHAR(100) NOT NULL,
+    apellido_alumno CHAR(100) NOT NULL,
+    tipo_doc_alumno CHAR(3) CHECK (tipo_doc_alumno IN ('DNI' , 'CI')),
+    nro_doc_alumno INT CHECK (nro_doc_alumno BETWEEN 1000 AND 999999999),
+    email_alumno CHAR(100) NOT NULL,
+    PRIMARY KEY (cd_alumno)
 ); ALTER TABLE 
  `ALUMNO` ADD UNIQUE `tipo_nro_doc_UNIQUE` (tipo_doc_alumno, nro_doc_alumno); ALTER TABLE 
  `ALUMNO` AUTO_INCREMENT = 150;
@@ -66,27 +67,42 @@ CREATE TABLE ALUMNO (
 -- Creacion de la tabla INSCRIPCION_PLAN
 -- -----------------------------------------------------------------------------
 CREATE TABLE INSCRIPCION_PLAN (
- cd_alumno INT, 
- cd_plan_estudio CHAR(6), 
- fc_alta DATETIME NOT NULL, PRIMARY KEY (cd_alumno, cd_plan_estudio), FOREIGN KEY (cd_alumno) REFERENCES ALUMNO (cd_alumno), FOREIGN KEY (cd_plan_estudio) REFERENCES PLAN_ESTUDIO (cd_plan_estudio)
+    cd_alumno INT,
+    cd_plan_estudio CHAR(6),
+    fc_alta DATETIME NOT NULL,
+    PRIMARY KEY (cd_alumno , cd_plan_estudio),
+    FOREIGN KEY (cd_alumno)
+        REFERENCES ALUMNO (cd_alumno),
+    FOREIGN KEY (cd_plan_estudio)
+        REFERENCES PLAN_ESTUDIO (cd_plan_estudio)
 );
 -- -----------------------------------------------------------------------------
 -- Creacion de la tabla INSCRIPCION_CURSO
 -- -----------------------------------------------------------------------------
 CREATE TABLE INSCRIPCION_CURSO (
- cd_alumno INT, 
- cd_curso INT, 
- fc_alta DATETIME NOT NULL, PRIMARY KEY (cd_alumno, cd_curso), FOREIGN KEY (cd_alumno) REFERENCES ALUMNO (cd_alumno), FOREIGN KEY (cd_curso) REFERENCES CURSO (cd_curso)
+    cd_alumno INT,
+    cd_curso INT,
+    fc_alta DATETIME NOT NULL,
+    PRIMARY KEY (cd_alumno , cd_curso),
+    FOREIGN KEY (cd_alumno)
+        REFERENCES ALUMNO (cd_alumno),
+    FOREIGN KEY (cd_curso)
+        REFERENCES CURSO (cd_curso)
 );
 -- -----------------------------------------------------------------------------
 -- Creacion de la tabla CORRELATIVIDAD
 -- -----------------------------------------------------------------------------
 CREATE TABLE CORRELATIVIDAD (
- cd_plan_estudio CHAR(6), 
- cd_materia CHAR(6), 
- cd_materia_correlativa CHAR(6), PRIMARY KEY (
- cd_plan_estudio, cd_materia, cd_materia_correlativa
-), FOREIGN KEY (cd_plan_estudio) REFERENCES PLAN_ESTUDIO (cd_plan_estudio), FOREIGN KEY (cd_materia) REFERENCES MATERIA (cd_materia), FOREIGN KEY (cd_materia_correlativa) REFERENCES MATERIA (cd_materia)
+    cd_plan_estudio CHAR(6),
+    cd_materia CHAR(6),
+    cd_materia_correlativa CHAR(6),
+    PRIMARY KEY (cd_plan_estudio , cd_materia , cd_materia_correlativa),
+    FOREIGN KEY (cd_plan_estudio)
+        REFERENCES PLAN_ESTUDIO (cd_plan_estudio),
+    FOREIGN KEY (cd_materia)
+        REFERENCES MATERIA (cd_materia),
+    FOREIGN KEY (cd_materia_correlativa)
+        REFERENCES MATERIA (cd_materia)
 );
 -- -----------------------------------------------------------------------------
 -- INSERTS
