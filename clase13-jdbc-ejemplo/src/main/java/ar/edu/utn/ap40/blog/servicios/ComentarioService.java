@@ -6,18 +6,22 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import ar.edu.utn.ap40.blog.DBManager;
+import ar.edu.utn.ap40.blog.db.DBManager;
 import ar.edu.utn.ap40.blog.entidades.Comentario;
 import ar.edu.utn.ap40.blog.entidades.Publicacion;
 
 public class ComentarioService {
+
 	/**
 	 * 
-	 * @param p
+	 * @param comentario
+	 * @param idPublicacion
 	 */
-	public void crearComentario(Comentario c, int idPublicacion) {
-		String query = "INSERT INTO COMENTARIO (nombre, cuerpo, cd_publicacion) VALUES ('" + c.getNombre() + "', '"
-				+ c.getCuerpo() + "', '" + idPublicacion + "')";
+	public void crearComentario(Comentario comentario, int idPublicacion) {
+		
+		String query = "INSERT INTO COMENTARIO (nombre, cuerpo, cd_publicacion) VALUES ('" + comentario.getNombre()
+				+ "', '" + comentario.getCuerpo() + "', '" + idPublicacion + "')";
+		
 		Connection connection = DBManager.getInstance().connect();
 		try {
 			Statement s = connection.createStatement();
@@ -40,6 +44,11 @@ public class ComentarioService {
 		}
 	}
 
+	/**
+	 * 
+	 * @param publicacion
+	 * @return
+	 */
 	public ArrayList<Comentario> getComentarios(Publicacion publicacion) {
 		ArrayList<Comentario> comentarios = new ArrayList<Comentario>();
 		String query = "SELECT * FROM COMENTARIO WHERE cd_publicacion = " + publicacion.getId();

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import ar.edu.utn.ap40.blog.DBManager;
+import ar.edu.utn.ap40.blog.db.DBManager;
 import ar.edu.utn.ap40.blog.entidades.Comentario;
 import ar.edu.utn.ap40.blog.entidades.Publicacion;
 
@@ -14,11 +14,11 @@ public class PublicacionService {
 
 	/**
 	 * 
-	 * @param p
+	 * @param publicacion
 	 */
-	public void crearDepartamento(Publicacion p) {
-		String query = "INSERT INTO PUBLICACION  (titulo, cuerpo) VALUES ('" + p.getTitulo() + "', '" + p.getCuerpo()
-				+ "')";
+	public void crearDepartamento(Publicacion publicacion) {
+		String query = "INSERT INTO PUBLICACION  (titulo, cuerpo) VALUES ('" + publicacion.getTitulo() + "', '"
+				+ publicacion.getCuerpo() + "')";
 		Connection connection = DBManager.getInstance().connect();
 		try {
 			Statement s = connection.createStatement();
@@ -43,17 +43,18 @@ public class PublicacionService {
 
 	/**
 	 * 
-	 * @param id
+	 * @param idPublicacion
 	 * @return
 	 */
-	public ArrayList<Publicacion> getPublicaciones(int id) {
+	public ArrayList<Publicacion> getPublicaciones(int idPublicacion) {
+		
 		ArrayList<Publicacion> publicaciones = new ArrayList<Publicacion>();
 		StringBuilder query = new StringBuilder();
 
 		query.append("SELECT * FROM PUBLICACION");
 
-		if (id != -1) {
-			query.append(" WHERE cd_publicacion = '" + id + "'");
+		if (idPublicacion != -1) {
+			query.append(" WHERE cd_publicacion = '" + idPublicacion + "'");
 		}
 
 		Connection conexion = DBManager.getInstance().connect();
@@ -61,17 +62,17 @@ public class PublicacionService {
 			Statement s = conexion.createStatement();
 			ResultSet rs = s.executeQuery(query.toString());
 			while (rs.next()) {
-				Publicacion p = null;
-				p = new Publicacion();
-				p.setId(rs.getInt(1));
-				p.setTitulo(rs.getString(2));
-				p.setCuerpo(rs.getString(3));
+				Publicacion publicacion = null;
+				publicacion = new Publicacion();
+				publicacion.setId(rs.getInt(1));
+				publicacion.setTitulo(rs.getString(2));
+				publicacion.setCuerpo(rs.getString(3));
 
-				ComentarioService cs = new ComentarioService();
-				ArrayList<Comentario> comentarios = cs.getComentarios(p);
-				p.setComentarios(comentarios);
+				ComentarioService comentarioService = new ComentarioService();
+				ArrayList<Comentario> comentarios = comentarioService.getComentarios(publicacion);
+				publicacion.setComentarios(comentarios);
 
-				publicaciones.add(p);
+				publicaciones.add(publicacion);
 
 			}
 		} catch (SQLException e) {
@@ -90,7 +91,6 @@ public class PublicacionService {
 			}
 		}
 		return publicaciones;
-
 	}
 
 }
