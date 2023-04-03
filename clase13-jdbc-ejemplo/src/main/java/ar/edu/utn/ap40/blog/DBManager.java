@@ -1,14 +1,12 @@
-package ar.edu.utn.ap40.guia_ejercicios;
+package ar.edu.utn.ap40.blog;
 
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.Statement;
 
 public class DBManager {
 
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
-	private static final String DB_NAME = "qatar2022";
+	private static final String DB_NAME = "blog";
 	private static final String DB_URL = "jdbc:mysql://192.168.2.15:33060/" + DB_NAME;
 	private static final String DB_USERNAME = "root";
 	private static final String DB_PASSWORD = "Unapassword1234!";

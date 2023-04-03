@@ -1,4 +1,4 @@
-package ar.edu.utn.ap40.guia_ejercicios.excecpiones;
+package ar.edu.utn.ap40.blog.excecpiones;
 
 public class DAOException extends Exception {
 
