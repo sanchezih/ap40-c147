@@ -17,7 +17,7 @@ public class PublicacionService {
 	 * 
 	 * @param publicacion
 	 */
-	public void crearDepartamento(Publicacion publicacion) {
+	public void crearPublicacion(Publicacion publicacion) {
 		String query = "INSERT INTO PUBLICACION (titulo, cuerpo) VALUES (?,?)";
 		Connection conexion = DBManager.getInstance().connect();
 		try {

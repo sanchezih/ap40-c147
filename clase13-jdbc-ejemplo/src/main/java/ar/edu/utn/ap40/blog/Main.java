@@ -63,7 +63,7 @@ public class Main {
 		Publicacion publicacion = new Publicacion(titulo, cuerpo);
 
 		PublicacionService publiaccionService = new PublicacionService();
-		publiaccionService.crearDepartamento(publicacion);
+		publiaccionService.crearPublicacion(publicacion);
 	}
 
 	/**
@@ -74,9 +74,9 @@ public class Main {
 		System.out.print("Ingrese el id de la publicacion a mostrar: ");
 		int id = scanner.nextInt();
 
-		PublicacionService departamentoService = new PublicacionService();
-		Publicacion p = departamentoService.getPublicaciones(id).get(0);
-		System.out.println(p.mostrar());
+		PublicacionService publicacionService = new PublicacionService();
+		Publicacion publicacion = publicacionService.getPublicaciones(id).get(0);
+		System.out.println(publicacion.mostrar());
 	}
 
 	/**
@@ -105,12 +105,12 @@ public class Main {
 
 		System.out.print("Ingrese el id de la publicacion: ");
 		int idPub = scanner.nextInt();
-		Publicacion p = publicacionService.getPublicaciones(idPub).get(0);
+		Publicacion publicacion = publicacionService.getPublicaciones(idPub).get(0);
 
 		Comentario comentario = new Comentario(nombre, cuerpo);
 
 		ComentarioService comentarioService = new ComentarioService();
-		comentarioService.crearComentario(comentario, p.getId());
+		comentarioService.crearComentario(comentario, publicacion.getId());
 
 	}
 }
