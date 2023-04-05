@@ -1,7 +1,5 @@
 package ar.edu.utn.ap40.ejemplos_presentacion._02_strings;
 
-import java.util.List;
-
 /**
  * String
  * 

@@ -15,12 +15,11 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
-		Persona p1= new Persona(null, null, null);
+
 		String[] opciones = { "1. Cargar Persona", "2. Mostrar Personas", "3. Salir" };
 		Scanner scanner = new Scanner(System.in);
 		int opcion = 1;
-	
+
 		while (opcion != 4) {
 			imprimirMenu(opciones);
 			try {
@@ -40,6 +39,7 @@ public class Main {
 				scanner.next();
 			}
 		}
+		scanner.close();
 	}
 
 	/**
@@ -69,6 +69,8 @@ public class Main {
 		System.out.print("Ingrese el dia de nacimiento: ");
 		LocalDate dob = LocalDate.parse(scanner.next());
 
+		scanner.close();
+
 		personas.add(new Persona(nombre, apillido, dob));
 	}
 
@@ -78,7 +80,7 @@ public class Main {
 	private static void mostrarPersonas() {
 		System.out.println("Thanks for choosing option 2");
 		for (Persona persona : personas) {
-			
+
 			System.out.println(persona.toString());
 		}
 	}
