@@ -1,6 +1,7 @@
 package ar.edu.utn.ap40.blog.servicios;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,30 +19,27 @@ public class ComentarioService {
 	 * @param idPublicacion
 	 */
 	public void crearComentario(Comentario comentario, int idPublicacion) {
-		
-		String query = "INSERT INTO COMENTARIO (nombre, cuerpo, cd_publicacion) VALUES ('" + comentario.getNombre()
-				+ "', '" + comentario.getCuerpo() + "', '" + idPublicacion + "')";
-		
-		Connection connection = DBManager.getInstance().connect();
+		String query = "INSERT INTO COMENTARIO (nombre, cuerpo, cd_publicacion) VALUES (?,?,?)";
+		Connection conexion = DBManager.getInstance().connect();
+		PreparedStatement preparedStatement;
 		try {
-			Statement s = connection.createStatement();
-			s.executeUpdate(query);
-			connection.commit();
+			preparedStatement = conexion.prepareStatement(query);
+			preparedStatement.setString(1, comentario.getNombre());
+			preparedStatement.setString(2, comentario.getCuerpo());
+			preparedStatement.setInt(3, idPublicacion);
+			preparedStatement.executeUpdate();
+			conexion.commit();
 		} catch (SQLException e) {
-			try {
-				connection.rollback();
-				e.printStackTrace();
-				// throw new DAOException("Error al conectar con la base de datos", e);
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			try {
-				connection.close();
+				conexion.close();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
 		}
+
 	}
 
 	/**
@@ -51,18 +49,20 @@ public class ComentarioService {
 	 */
 	public ArrayList<Comentario> getComentarios(Publicacion publicacion) {
 		ArrayList<Comentario> comentarios = new ArrayList<Comentario>();
-		String query = "SELECT * FROM COMENTARIO WHERE cd_publicacion = " + publicacion.getId();
+		String query = "SELECT * FROM COMENTARIO WHERE cd_publicacion = ?";
 		Connection conexion = DBManager.getInstance().connect();
-		try {
-			Statement s = conexion.createStatement();
-			ResultSet rs = s.executeQuery(query);
 
-			while (rs.next()) {
+		try {
+			PreparedStatement preparedStatement = conexion.prepareStatement(query);
+			preparedStatement.setInt(1, publicacion.getId());
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
 				Comentario comentario = null;
 				comentario = new Comentario();
-				comentario.setId(rs.getInt(1));
-				comentario.setNombre(rs.getString(2));
-				comentario.setCuerpo(rs.getString(3));
+				comentario.setId(resultSet.getInt("cd_comentario"));
+				comentario.setNombre(resultSet.getString("nombre"));
+				comentario.setCuerpo(resultSet.getString("cuerpo"));
 
 				comentarios.add(comentario);
 			}

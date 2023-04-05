@@ -1,6 +1,7 @@
 package ar.edu.utn.ap40.blog.servicios;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,24 +18,20 @@ public class PublicacionService {
 	 * @param publicacion
 	 */
 	public void crearDepartamento(Publicacion publicacion) {
-		String query = "INSERT INTO PUBLICACION  (titulo, cuerpo) VALUES ('" + publicacion.getTitulo() + "', '"
-				+ publicacion.getCuerpo() + "')";
-		Connection connection = DBManager.getInstance().connect();
+		String query = "INSERT INTO PUBLICACION (titulo, cuerpo) VALUES (?,?)";
+		Connection conexion = DBManager.getInstance().connect();
 		try {
-			Statement s = connection.createStatement();
-			s.executeUpdate(query);
-			connection.commit();
+			PreparedStatement preparedStatement = conexion.prepareStatement(query);
+			preparedStatement.setString(1, publicacion.getTitulo());
+			preparedStatement.setString(2, publicacion.getCuerpo());
+			preparedStatement.executeUpdate();
+			conexion.commit();
 		} catch (SQLException e) {
-			try {
-				connection.rollback();
-				e.printStackTrace();
-				// throw new DAOException("Error al conectar con la base de datos", e);
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			try {
-				connection.close();
+				conexion.close();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
@@ -45,36 +42,45 @@ public class PublicacionService {
 	 * 
 	 * @param idPublicacion
 	 * @return
+	 * @throws SQLException
 	 */
 	public ArrayList<Publicacion> getPublicaciones(int idPublicacion) {
-		
-		ArrayList<Publicacion> publicaciones = new ArrayList<Publicacion>();
-		StringBuilder query = new StringBuilder();
 
+		boolean isPublicacionUnica = idPublicacion != -1 ? true : false;
+
+		StringBuilder query = new StringBuilder();
+		ArrayList<Publicacion> publicaciones = new ArrayList<Publicacion>();
 		query.append("SELECT * FROM PUBLICACION");
 
-		if (idPublicacion != -1) {
-			query.append(" WHERE cd_publicacion = '" + idPublicacion + "'");
+		if (isPublicacionUnica) {
+			query.append(" WHERE cd_publicacion = ?");
 		}
-
+		
 		Connection conexion = DBManager.getInstance().connect();
+
 		try {
-			Statement s = conexion.createStatement();
-			ResultSet rs = s.executeQuery(query.toString());
-			while (rs.next()) {
+			PreparedStatement preparedStatement = conexion.prepareStatement(query.toString());
+			
+			if (isPublicacionUnica) {
+				preparedStatement.setInt(1, idPublicacion);
+			}
+		
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
 				Publicacion publicacion = null;
 				publicacion = new Publicacion();
-				publicacion.setId(rs.getInt(1));
-				publicacion.setTitulo(rs.getString(2));
-				publicacion.setCuerpo(rs.getString(3));
+				publicacion.setId(resultSet.getInt("cd_publicacion"));
+				publicacion.setTitulo(resultSet.getString("titulo"));
+				publicacion.setCuerpo(resultSet.getString("cuerpo"));
 
 				ComentarioService comentarioService = new ComentarioService();
 				ArrayList<Comentario> comentarios = comentarioService.getComentarios(publicacion);
 				publicacion.setComentarios(comentarios);
 
 				publicaciones.add(publicacion);
-
 			}
+
 		} catch (SQLException e) {
 			try {
 				conexion.rollback();
