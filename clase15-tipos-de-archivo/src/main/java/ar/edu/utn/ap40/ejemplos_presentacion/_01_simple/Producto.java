@@ -1,6 +1,7 @@
 package ar.edu.utn.ap40.ejemplos_presentacion._01_simple;
 
 public class Producto {
+
 	private String nombre;
 	private int stock;
 	private float precio;

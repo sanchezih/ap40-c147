@@ -9,21 +9,21 @@ public class Main {
 
 		// Jackson - Relaciones mas complejas
 		Persona ramon = new Persona("Ramon", "Perea");
-		
+
 		CarritoCompra carrito = new CarritoCompra(ramon);
-		
+
 		Producto prod = new Producto("destornillador", 11, 10f);
 		ItemCarrito item = new ItemCarrito();
 		item.setCantidad(3);
 		item.setProducto(prod);
 		carrito.agregarItem(item);
-		
+
 		prod = new Producto("tuerca", 1100, 0.01f);
 		item = new ItemCarrito();
 		item.setCantidad(3);
 		item.setProducto(prod);
 		carrito.agregarItem(item);
-		
+
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonText = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(carrito);
 		System.out.println(jsonText);
