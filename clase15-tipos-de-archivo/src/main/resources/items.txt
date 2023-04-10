@@ -1,0 +1,6 @@
+1	0	Jabon
+3	0	Desodorante
+2	0	Shampoo
+8	0	Dentifrico
+1	0	Enguaje bucal
+3	0	Alcohol
