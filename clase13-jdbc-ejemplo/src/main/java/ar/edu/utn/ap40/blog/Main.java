@@ -61,8 +61,6 @@ public class Main {
 		System.out.print("Ingrese el cuerpo: ");
 		String cuerpo = scanner.nextLine();
 
-		scanner.close();
-
 		Publicacion publicacion = new Publicacion(titulo, cuerpo);
 
 		PublicacionService publiaccionService = new PublicacionService();
@@ -110,8 +108,6 @@ public class Main {
 		int idPub = scanner.nextInt();
 		Publicacion publicacion = publicacionService.getPublicaciones(idPub).get(0);
 
-		scanner.close();
-		
 		Comentario comentario = new Comentario(nombre, cuerpo);
 
 		ComentarioService comentarioService = new ComentarioService();
