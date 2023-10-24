@@ -33,4 +33,4 @@ https://www.argentina.gob.ar/economia/conocimiento/argentina-programa
 | 15|	Tipos de Archivo											|
 | 16|	Consultas y Repaso 											|
 | 17|	Simulacro													|
-| 18|	Presentación TP Integrador									|
+| 18|	Presentacion TP Integrador									|
